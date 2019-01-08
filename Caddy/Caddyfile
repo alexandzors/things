@@ -1,0 +1,89 @@
+#THIS CADDY FILE IS TO BE USED WITH alexandzors/caddy:cf docker container!
+# docker pull alexandzors/caddy:cf
+# see caddy_docker-compose.yml for caddy stack deployment
+www.domain.net, domain.net {
+        gzip
+        header / {
+            Content-Security-Policy 
+            default-src "*"
+            X-Frame-Options "DENY"
+            X-Content-Type-Options "nosniff"
+            X-XSS-Protection "1; mode=block"
+            Strict-Transport-Security "max-age=31536000;"
+            Referrer-Policy "same-origin"
+            Feature-Policy "self"
+        }  
+        tls certs@domain.net
+        rewrite {
+            if {path} not_starts_with /portainer
+            to /redir_to_external_site
+        }
+        redir /redir_to_external_site https://myexternalsite.com
+        proxy /portainer/ 127.0.0.60:9000 {
+                without /portainer
+                transparent
+                header_upstream -Connection
+        }
+        proxy /portainer/api/websocket/ 127.0.0.60:9000 {
+                without /portainer
+                transparent
+                websocket
+        }
+}
+
+plex.domain.net {
+        gzip
+        header / {
+            Content-Security-Policy 
+            default-src "*"
+            X-Frame-Options "DENY"
+            X-Content-Type-Options "nosniff"
+            X-XSS-Protection "1; mode=block"
+            Strict-Transport-Security "max-age=31536000;"
+            Referrer-Policy "same-origin"
+            Feature-Policy "self"
+        } 
+        timeouts none
+        tls certs@domain.net    
+        proxy / 127.0.0.47:32400 {
+                transparent
+        }
+}
+
+unms.domain.net {
+        gzip
+        tls certs@domain.net 
+        proxy / 127.0.0.60 {
+                transparent
+                websocket
+                insecure_skip_verify
+        }
+}
+
+unifi.domain.net {
+        gzip
+        header / {
+            Content-Security-Policy 
+            default-src "*"
+            X-Frame-Options "DENY"
+            X-Content-Type-Options "nosniff"
+            X-XSS-Protection "1; mode=block"
+            Strict-Transport-Security "max-age=31536000;"
+            Referrer-Policy "same-origin"
+            Feature-Policy "self"
+        }  
+        tls certs@domain.net 
+        proxy / 127.0.0.60:8443 {
+                websocket
+                transparent
+                insecure_skip_verify
+        }
+}
+
+vpn.domain.net {
+        tls certs@domain.net 
+        proxy / 127.0.0.60:31194 {
+                transparent
+                websocket
+        }       
+}

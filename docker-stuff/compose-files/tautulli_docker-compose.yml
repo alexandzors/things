@@ -1,0 +1,31 @@
+# Change the volume for /logs source to your plex server's shared logs folder otherwise tautulli won't work. This file defaults to a cifs mounted directory in /media/plexlogs
+# Change volume sources to match your setup.
+#
+# Created by github.com/alexandzors 01-08-2019
+# Copy this file into a dir and run "docker compose -f tautulli_docker-compose.yml up"
+version: '3'
+services:
+  tautulli:
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 240s
+    image: linuxserver/tautulli
+    ports:
+      - "30007:8181"
+    environment:
+      TZ: "America/New_York"
+      PUID: "1000"
+      PGID: "1000"
+    volumes:
+      - "tautulli_cfg:/config"
+      - "plex_log:/logs:ro"
+
+volumes:
+  tautulli_cfg:
+    - /path/on/host
+  plex_log:
+    - /path/on/host

@@ -1,0 +1,28 @@
+# Replace all "<>" sections for your environment setup.
+# Created by github.com/alexandzors 01-06-2019
+# Run "docker compose -f caddy_docker-compose.yml up"
+# See docker-stuff/docker-build-scripts/caddy-build.sh for building a custom caddy image with plugins.
+version: '3'
+services:
+  caddy:
+    image: alexandzors/caddy:cf
+    ports:
+      - "81:80"
+      - "444:443"
+      - "2015:2015"
+    volumes:
+      - caddy_file:/etc/Caddyfile
+      - caddy_certs:/root/.caddy
+      - caddy_www:/srv
+    environment:
+      - ACME_AGREE=true
+      - CLOUDFLARE_EMAIL=<CF_EMAIL>
+      - CLOUDFLARE_API_KEY=<CF_API_KEY>
+  
+volumes:
+  caddy_file:
+    - /path/on/host
+  caddy_certs:
+    - /path/on/host
+  caddy_www:
+    - /path/on/host

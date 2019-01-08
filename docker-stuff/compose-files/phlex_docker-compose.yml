@@ -1,0 +1,18 @@
+# Created by github.com/alexandzors 01-04-2019
+# Copy this file into a dir and run "docker compose -f phlex_docker-compose.yml up"
+
+version: '3'
+services:
+  phlex:
+    image: digitalhigh/phlex
+    ports:
+      - "5666:80"
+      - "5667:443"
+    volumes:
+      - phlex_cfg:/config
+    environment:
+      - TZ=America/New_York
+
+volumes:
+  phlex_cfg:
+    - /path/on/host

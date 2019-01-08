@@ -1,0 +1,148 @@
+# Sonarr, Radarr, Lidarr, Bazarr, and Jackett
+# See volumes at bottom of compose file for volume setup.
+# You will need to install cifs on your docker machine if you plan to mount Windows network shares as folders on your Ubuntu docker system. See Scripts/shell_scripts/updateubuntu.sh
+# Change "<dns-hostname>" to your docker swarm node that has your network share volumes mounted. Unfortunately SQLite cannot run over smb or nfs without running into issues.
+# Created by github.com/alexandzors 01-08-2019
+# Copy this file into a dir and run "docker compose -f media_docker-compose.yml up"
+version: '3'
+services:
+  sonarr:
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == <dns-hostname>
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 240s
+    image: linuxserver/sonarr
+    ports:
+      - "30000:8989"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+    volumes:
+      - tvshow_dir:/tv
+      - /dev/rtc:/dev/rtc:ro
+      - sonarr_cfg:/config
+      - download_dir:/downloads
+    depends_on:
+      - jackett
+  radarr:
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == <dns-hostname>
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 240s
+    image: linuxserver/radarr
+    ports:
+      - "30001:7878"
+    environment:
+      PUID: "1001"
+      PGID: "1001"
+      TZ: "America/New_York"
+    volumes:
+      - download_dir:/downloads
+      - radarr_cfg:/config
+      - movie_dir:/movies
+    depends_on:
+      - jackett
+  jackett:
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == <dns-hostname>
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 240s
+    image: linuxserver/jackett
+    ports:
+      - "30002:9117"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "America/New_York"
+    volumes:
+      - jackett_cfg:/config
+      - download_dir:/downloads
+      - /etc/localtime:/etc/localtime:ro
+  bazarr:
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == <dns-hostname>
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 240s
+    image: linuxserver/bazarr
+    ports:
+      - "30003:6767"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "America/New_York"
+    volumes:
+      - bazarr_cfg:/config
+      - tvshow_dir:/tv
+      - movie_dir:/movies
+    depends_on:
+      - sonarr
+      - radarr
+  lidarr:
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == <dns-hostname>
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 240s
+    image: linuxserver/lidarr
+    ports:
+      - "30004:8686"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+    volumes:
+      - lidarr_cfg:/config
+      - download_dir:/downloads
+      - music_dir:/music
+    depends_on:
+      - jackett
+
+# Change /path/on/host to match your setup.
+
+volumes:
+  sonarr_cfg:
+    - /path/on/host
+  radarr_cfg:
+    - /path/on/host
+  lidarr_cfg:
+    - /path/on/host
+  bazarr_cfg:
+    - /path/on/host
+  jackett_cfg:
+    - /path/on/host
+  download_dir:
+    - /path/on/host
+  tvshow_dir:
+    - /path/on/host
+  movie_dir:
+    - /path/on/host
+  music_dir:
+    - /path/on/host
