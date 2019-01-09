@@ -17,6 +17,6 @@ header / {
 
 Will give you:
 
-![](https://imgur.com/x8zwKLp)
+![](https://i.imgur.com/x8zwKLp.png)
 
 with https://securityheaders.com
