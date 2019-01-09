@@ -87,3 +87,12 @@ vpn.domain.net {
                 websocket
         }       
 }
+
+flex.domain.net {
+        index index.php
+        tls certs@domain.net
+        proxy / 127.0.0.1:5666 {
+                transparent
+                websocket
+        }
+}
