@@ -20,3 +20,9 @@ Will give you:
 ![](https://i.imgur.com/x8zwKLp.png)
 
 with https://securityheaders.com
+
+
+## See https://caddyserver.com/docs 
+for more Caddyserver documentation as well as extra plugins that can be used in the docker build script.
+## Also check out https://caddy.community/
+for help regarding Caddy server.
