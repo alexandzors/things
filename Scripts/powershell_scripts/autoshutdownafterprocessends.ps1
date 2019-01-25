@@ -1,6 +1,6 @@
 #This can be used in conjunction with the hypervautovmrollback.ps1 
 
-$Process = Get-Process INSERTPROCESSNAMEHERE
+$Process = Get-Process "INSERTPROCESSNAMEHERE"
 if ($Process -ne $null)
 {
     <#This loop waits for the specfied process to end before continuing.#>
