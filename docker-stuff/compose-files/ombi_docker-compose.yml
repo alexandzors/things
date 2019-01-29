@@ -1,0 +1,18 @@
+# Created by github.com/alexandzors 01-29-2019
+# Copy this file into a dir and run "docker compose -f ombi_docker-compose.yml up"
+
+version: '3'
+services:
+  ombi:
+    deploy:
+      replicas: 1
+    image: linuxserver/ombi:latest
+    volumes:
+      ombicfg:/config
+    environment:
+      TZ: America/New_York
+    ports:
+      3579:3579
+
+volumes:
+  ombicfg:
