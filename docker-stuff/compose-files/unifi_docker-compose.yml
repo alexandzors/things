@@ -22,7 +22,9 @@ services:
       - PGID=1000
       - PUID=1000
     volumes:
-      - unifi_data:/config
-
-volumes:
-  unifi_data:
+      - /path/on/host:/config
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f https://<ipofservice>:8443 || exit 1"]
+      interval: 5m
+      timeout: 10s
+      retries: 3   

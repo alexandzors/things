@@ -4,7 +4,7 @@
 # Created by github.com/alexandzors 01-06-2019
 # See github.com/haugene/transmission-openvpn for all environment variables.
 # Do to limitations in docker swarm, and priviledged permissions, this compose file can not be used to deploy this image as a swarm service/container.
-# Copy this file into a dir and run "docker compose -f transmission_docker-compose.yml up" to deploy this container. 
+# Copy this file into a dir and run "docker-compose -f transmission_docker-compose.yml up" to deploy this container. 
 version: "3"
 services:
   transmission-openvpn:
@@ -38,13 +38,11 @@ services:
       - "9091:9091"
       - "9092:9092"
     volumes:
-      - transmission-dl:/downloads
-      - transmission-cfg:/config
+      - /path/on/host:/downloads
       - "/etc/localtime:/etc/localtime:ro"
-      - transmission-data:/data
-     
-volumes:
- transmission-cfg:
- transmission-data:
- transmission-dl:
-  - /path/on/host
+      - /path/on/host:/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://<ipofservice>:9091 || exit 1"]
+      interval: 5m
+      timeout: 10s
+      retries: 3    

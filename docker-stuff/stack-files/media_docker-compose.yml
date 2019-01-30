@@ -1,9 +1,9 @@
 # Sonarr, Radarr, Lidarr, Bazarr, and Jackett
-# See volumes at bottom of compose file for volume setup.
 # You will need to install cifs on your docker machine if you plan to mount Windows network shares as folders on your Ubuntu docker system. See Scripts/shell_scripts/updateubuntu.sh
 # Change "<dns-hostname>" to your docker swarm node that has your network share volumes mounted. Unfortunately SQLite cannot run over smb or nfs without running into issues.
+# Change /path/on/host in each service's volumes section to match your setup.
 # Created by github.com/alexandzors 01-08-2019
-# Copy this file into a dir and run "docker compose -f media_docker-compose.yml up"
+# Copy this file into a dir and run "docker stack deploy -c media_docker-compose.yml media"
 version: '3'
 services:
   sonarr:
@@ -19,17 +19,22 @@ services:
         window: 240s
     image: linuxserver/sonarr
     ports:
-      - "30000:8989"
+      - "8989:8989"
     environment:
       PUID: "1000"
       PGID: "1000"
     volumes:
-      - tvshow_dir:/tv
+      - /path/on/host:/tv
       - /dev/rtc:/dev/rtc:ro
-      - sonarr_cfg:/config
-      - download_dir:/downloads
+      - /path/on/host:/config
+      - /path/on/host:/downloads
     depends_on:
       - jackett
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://<ipofservice>:8989 || exit 1"]
+      interval: 5m
+      timeout: 10s
+      retries: 3    
   radarr:
     deploy:
       placement:
@@ -43,17 +48,22 @@ services:
         window: 240s
     image: linuxserver/radarr
     ports:
-      - "30001:7878"
+      - "7878:7878"
     environment:
       PUID: "1001"
       PGID: "1001"
       TZ: "America/New_York"
     volumes:
-      - download_dir:/downloads
-      - radarr_cfg:/config
-      - movie_dir:/movies
+      - /path/on/host:/downloads
+      - /path/on/host:/config
+      - /path/on/host:/movies
     depends_on:
       - jackett
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://<ipofservice>:7878 || exit 1"]
+      interval: 5m
+      timeout: 10s
+      retries: 3    
   jackett:
     deploy:
       placement:
@@ -67,15 +77,20 @@ services:
         window: 240s
     image: linuxserver/jackett
     ports:
-      - "30002:9117"
+      - "9117:9117"
     environment:
       PUID: "1000"
       PGID: "1000"
       TZ: "America/New_York"
     volumes:
-      - jackett_cfg:/config
-      - download_dir:/downloads
+      - /path/on/host:/config
+      - /path/on/host:/downloads
       - /etc/localtime:/etc/localtime:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://<ipofservice>:9117 || exit 1"]
+      interval: 5m
+      timeout: 10s
+      retries: 3    
   bazarr:
     deploy:
       placement:
@@ -89,18 +104,23 @@ services:
         window: 240s
     image: linuxserver/bazarr
     ports:
-      - "30003:6767"
+      - "6767:6767"
     environment:
       PUID: "1000"
       PGID: "1000"
       TZ: "America/New_York"
     volumes:
-      - bazarr_cfg:/config
-      - tvshow_dir:/tv
-      - movie_dir:/movies
+      - /path/on/host:/config
+      - /path/on/host:/tv
+      - /path/on/host:/movies
     depends_on:
       - sonarr
       - radarr
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://<ipofservice>:6767 || exit 1"]
+      interval: 5m
+      timeout: 10s
+      retries: 3    
   lidarr:
     deploy:
       placement:
@@ -114,35 +134,18 @@ services:
         window: 240s
     image: linuxserver/lidarr
     ports:
-      - "30004:8686"
+      - "8686:8686"
     environment:
       PUID: "1000"
       PGID: "1000"
     volumes:
-      - lidarr_cfg:/config
-      - download_dir:/downloads
-      - music_dir:/music
+      - /path/on/host:/config
+      - /path/on/host:/downloads
+      - /path/on/host:/music
     depends_on:
       - jackett
-
-# Change /path/on/host to match your setup.
-
-volumes:
-  sonarr_cfg:
-    - /path/on/host
-  radarr_cfg:
-    - /path/on/host
-  lidarr_cfg:
-    - /path/on/host
-  bazarr_cfg:
-    - /path/on/host
-  jackett_cfg:
-    - /path/on/host
-  download_dir:
-    - /path/on/host
-  tvshow_dir:
-    - /path/on/host
-  movie_dir:
-    - /path/on/host
-  music_dir:
-    - /path/on/host
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://<ipofservice>:8686 || exit 1"]
+      interval: 5m
+      timeout: 10s
+      retries: 3    

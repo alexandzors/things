@@ -2,7 +2,7 @@
 # Change volume sources to match your setup.
 #
 # Created by github.com/alexandzors 01-08-2019
-# Copy this file into a dir and run "docker compose -f tautulli_docker-compose.yml up"
+# Copy this file into a dir and run "docker stack deploy -c tautulli_docker-compose.yml plex"
 version: '3'
 services:
   tautulli:
@@ -15,17 +15,16 @@ services:
         window: 240s
     image: linuxserver/tautulli
     ports:
-      - "30007:8181"
+      - "8181:8181"
     environment:
-      TZ: "America/New_York"
-      PUID: "1000"
-      PGID: "1000"
+     - PGID=1000
+     - PUID=1000
+     - TZ=America/New_York
     volumes:
-      - "tautulli_cfg:/config"
-      - "plex_log:/logs:ro"
-
-volumes:
-  tautulli_cfg:
-    - /path/on/host
-  plex_log:
-    - /path/on/host
+      - "/path/on/host:/config"
+      - "/path/on/host:/logs:ro"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://<ipofservice>:8181 || exit 1"]
+      interval: 5m
+      timeout: 10s
+      retries: 3    
