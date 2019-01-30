@@ -8,11 +8,13 @@ services:
       replicas: 1
     image: linuxserver/ombi:latest
     volumes:
-      ombicfg:/config
+      /path/on/host:/config
     environment:
       TZ: America/New_York
     ports:
       3579:3579
-
-volumes:
-  ombicfg:
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://<ipofservice>:3579 || exit 1"]
+      interval: 5m
+      timeout: 10s
+      retries: 3    
