@@ -1,3 +1,4 @@
+# THIS IS AN OLD SCRIPT. PLEASE SEE checkservices.ps1 FOR A NEWER SCRIPT.
 # This can be used with task scheduler to automatically restart a service every few minutes if it shuts off. This does not auto detect the service status until it is run. 
 # aka no watchdog
 # Service name needs to be what is displayed in the service properties window. IT IS CASE SENSITIVE!

@@ -1,3 +1,5 @@
+# THIS IS AN OLD SCRIPT. PLEASE SEE checkservices.ps1 FOR A NEWER SCRIPT.
+
 #This will need to be run as admin in order for it to interact with services.
 $Service = Get-Service -Name 'name of service'
 while ($Service.Status -ne 'Running')
