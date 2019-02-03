@@ -209,3 +209,5 @@ Once Prometheus is running we can add it as a data source in Grafana.
 - You now have a panel that tells you the total downloaded bytes from your transmission client.
 
 Note: If you navigate to http://ip:19091/metrics you can see what metrics can be queried for transmission.
+
+--< [Back](https://alexandzors/github/things)
