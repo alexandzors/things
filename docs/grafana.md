@@ -139,7 +139,7 @@ Now that we have Grafana, Influxdb, and Varken running we can now get the dashbo
 
 - Now that the data source is added we can add the dashboard. Again the awesome Varken fellows have an official Varken dashboard that includes pre-configured elements for reading data from your varken database. You can get the dashboard ID from [here](https://grafana.com/dashboards/9585). Paste the code into the dashboard import section and click "load."
 
-[](https://i.imgur.com/eFbZzUh.png)
+![My Dashboard](https://i.imgur.com/eFbZzUh.png)
 
 - Now my dashboard includes data from [Glances](https://nicolargo.github.io/glances/) as well as [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/). Which when I get a chance, and my infant daughter allows me, I will get another guide up for importing glances and Telegraf data into your Varken dashboard to monitor system information. My dashboard is also not complete as there are a few other things I want to add to it.
 
