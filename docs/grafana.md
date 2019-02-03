@@ -2,8 +2,13 @@
 layout: default
 ---
 
+<div style="text-align:center">
+
 # THE GRAFANA MONITOR GUIDE
-### Monitoring your homelab like a pro!
+#### Monitoring your homelab like a pro!
+
+</div>
+
 
 ## Before we get started
 
