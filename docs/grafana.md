@@ -3,9 +3,9 @@ layout: default
 ---
 
 # THE GRAFANA MONITOR GUIDE
-#### Monitoring your homelab like a pro!
+*Monitoring your homelab like a pro!*
 
-
+--
 
 ## Before we get started
 
@@ -29,5 +29,43 @@ Since this tutorial includes Plex services monitoring you will need the followin
 - [Radarr](https://radarr.video/)
 - [Plex Media Server](https://plex.tv)
 - [Tautulli](https://tautulli.com/)
+- [Ombi](https://ombi.io/)
+- [Transmission](https://github.com/haugene/docker-transmission-openvpn)
 
-Draft 1, 2/3/2019 - 1:26AM
+Draft 2, 2/3/2019 - 12:04PM
+
+## Setting up Influxdb
+
+Now for this guide we will be setting up influxdb in docker. Grafana supports a few different data sources however for this guide we will only be using influxdb and prometheus.
+
+- ssh to your linux docker machine and run the following commands. (You can change the volume mapping to match your setup).
+
+`mkdir /home/username/influxdb`
+
+`docker run -p 8086:8086 -v /home/username/influxdb:/var/lib/influxdb influxdb`
+
+If you get a permission denied error just append `sudo` to the beginning of your commands.
+
+- Now that influxdb is running we can create our first database. This will be for [Varken](https://github.com/Boerderij/Varken) which will be collecting data from Sonarr, Radarr, Tautulli, and sending it to influx. So run the following command to create your varken db.
+
+`curl -i -XPOST http://influxhostip:8086/query --data-urlencode "q=CREATE DATABSE varken`
+
+Hopefully you got a successful response and not a 404 message.
+
+## Setting up Varken
+
+- Hopefully you are still ssh'd to your docker machine from the influx install. If not ssh back into it and run the following command.
+
+`mkdir /home/username/varken`
+
+- Now you will need to create a varken.ini file in your ~/varken directory. You can find an example of this config file [here](https://github.com/alexandzors/things/confg_files/varken.ini). To create this file you can run either:
+
+`nano varken.ini` or `touch varken.ini && nano varken.ini`
+
+Varken config docs can be found [here](https://github.com/Boerderij/Varken/wiki/Configuration)
+
+- Once the config file is done you can now run the following to start Varken
+
+`docker run -d --name=varken -v /home/username/varken:/config TZ=America/Chicago boerderij/varken`
+
+Change `TZ` to match your timezone.
