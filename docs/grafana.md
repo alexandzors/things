@@ -30,7 +30,7 @@ Since this tutorial includes Plex services monitoring you will need the followin
 - [Plex Media Server](https://plex.tv)
 - [Tautulli](https://tautulli.com/)
 - [Ombi](https://ombi.io/)
-- [Transmission](https://github.com/haugene/docker-transmission-openvpn)
+- Optional: [Transmission](https://github.com/haugene/docker-transmission-openvpn)
 
 Draft 2, 2/3/2019 - 12:04PM
 
