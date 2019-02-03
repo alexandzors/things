@@ -15,4 +15,4 @@ Follow the links below for guides and other stuff!
 ## Useful links
 
 - [List of InfluxDB things](https://github.com/mark-rushakoff/awesome-influxdb)
-- [Buy me a coffee!](https://alexsguardian.net/donate)
+- [Tips](https://alexsguardian.net/donate)
