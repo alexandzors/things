@@ -54,7 +54,20 @@ If you get a permission denied error just append `sudo` to the beginning of your
 
 `curl -i -XPOST http://influxhostip:8086/query --data-urlencode "q=CREATE DATABASE varken`
 
-Hopefully you got a successful response and not a 404 message.
+You should see something like this, if it works:
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Request-Id: feeb7689-289a-11e9-8759-0242ac110003
+X-Influxdb-Build: OSS
+X-Influxdb-Version: 1.7.3
+X-Request-Id: feeb7689-289a-11e9-8759-0242ac110003
+Date: Mon, 04 Feb 2019 16:36:17 GMT
+Transfer-Encoding: chunked
+
+{"results":[{"statement_id":0}]}
+```
 
 ## Setting up Varken
 
