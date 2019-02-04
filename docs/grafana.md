@@ -73,7 +73,7 @@ Varken config docs can be found [here](https://github.com/Boerderij/Varken/wiki/
 *You can find my exact varken.ini file [here](https://github.com/alexandzors/things/blob/master/config_files/varken.ini) if you are stuck.*
 - Once the config file is done you can now run the following to start Varken
 
-`docker run -d --name=varken -v /home/username/varken:/config TZ=America/Chicago boerderij/varken`
+`docker run -d --name=varken -v /home/username/varken:/config -e TZ=America/Chicago boerderij/varken`
 
 Change `TZ` to match your timezone.
 
