@@ -68,9 +68,9 @@ Without Varken, this project would have been a lot harder to get going. Make sur
 
 `nano varken.ini` or `touch varken.ini && nano varken.ini`
 
-Varken config docs can be found [here](https://github.com/Boerderij/Varken/wiki/Configuration)
+Varken config docs can be found [here](https://github.com/Boerderij/Varken/wiki/Configuration).
 
-*You can find me exact varken.ini file [here](https://github.com/alexandzors/things/blob/master/config_files/varken.ini) if you are stuck*
+*You can find my exact varken.ini file [here](https://github.com/alexandzors/things/blob/master/config_files/varken.ini) if you are stuck.*
 - Once the config file is done you can now run the following to start Varken
 
 `docker run -d --name=varken -v /home/username/varken:/config TZ=America/Chicago boerderij/varken`
