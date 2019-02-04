@@ -240,6 +240,6 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 
 - [Telegraf for Grafana on Windows](https://alexandzors.github.io/things/telegraf)
 - [Glances for Grafana on Linux](https://alexandzors.github.io/things/glances)
-- [Pi-hole scraper for Grafana](https://chrisbergeron.com/2017/12/28/pihole_dashboard/)
+- [Speedtest for Grafana](https://github.com/barrycarey/Speedtest-for-InfluxDB-and-Grafana)
 
 --< [Back to landing page](https://alexandzors.github.io/things/)
