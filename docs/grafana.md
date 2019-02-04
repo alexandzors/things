@@ -222,4 +222,11 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 - [https://github.com/Boerderij/Varken](https://github.com/Boerderij/Varken)
 - [https://github.com/metalmatze/transmission-exporter](https://github.com/metalmatze/transmission-exporter)
 
+
+# More Guides
+
+- [Telegraf for Grafana on Windows](https://alexandzors.github.io/things/telegraf)
+- [Glances for Grafana on Linux](https://alexandzors.github.io/things/glances)
+- [Pi-hole scraper for Grafana](https://chrisbergeron.com/2017/12/28/pihole_dashboard/)
+
 --< [Back to landing page](https://alexandzors.github.io/things/)
