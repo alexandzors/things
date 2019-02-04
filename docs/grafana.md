@@ -222,4 +222,4 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 - [https://github.com/Boerderij/Varken](https://github.com/Boerderij/Varken)
 - [https://github.com/metalmatze/transmission-exporter](https://github.com/metalmatze/transmission-exporter)
 
---< [Back](https://alexandzors/github/things)
+--< [Back to landing page](https://alexandzors.github.io/things/)
