@@ -15,6 +15,8 @@ When I first went to setup Grafana for homelab monitoring I quickly came to the 
 
 Also this tutorial is not designed for people that wish to run Grafana outside of their network on a cloud hosted instance. So do not expect any sort of guide on SSL except for running Grafana behind a reverse proxy powered by [Caddy](https://caddyserver.com/)! If you wish to setup SSL/TLS/Encryption for your database calls and collectors, you will have to find a different guide for that. Sorry!
 
+-----
+
 ## Pre-Requisites
 
 - You will need to know how to edit config files from the Linux command line. I recommend using Nano as that's what this tutorial will use. If you don't have Nano installed you can get it by running `apt-get install nano -y` or `yum install nano -y`. For editing config files on Windows I recommend using [Visual Studio Code](https://code.visualstudio.com/). Its awesome, open source, and has a dark theme by default!
@@ -32,7 +34,9 @@ Since this tutorial includes Plex services monitoring you will need the followin
 - [Ombi](https://ombi.io/)
 - Optional: [Transmission](https://github.com/haugene/docker-transmission-openvpn)
 
-Draft 2, 2/3/2019 - 12:04PM
+Draft 3, 2/3/2019 - 9:11PM
+
+-----
 
 ## Setting up Influxdb
 
@@ -209,5 +213,12 @@ Once Prometheus is running we can add it as a data source in Grafana.
 - You now have a panel that tells you the total downloaded bytes from your transmission client.
 
 Note: If you navigate to http://ip:19091/metrics you can see what metrics can be queried for transmission.
+
+**This guide is incomplete and is still a WIP. Please feel free to reach out with any issues!**
+
+Please make sure to check out the creators of Varken and the Transmission Exporter!:
+
+- https://github.com/Boerderij/Varken
+- https://github.com/metalmatze/transmission-exporter
 
 --< [Back](https://alexandzors/github/things)
