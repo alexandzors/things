@@ -23,7 +23,7 @@ Also this tutorial is not designed for people that wish to run Grafana outside o
 - You will need at least one Linux machine running Docker.
 - You will need a few hours of dedicated time.
 - You will need to know how to query databases. *Don't worry ill guide you through some basics!*
-- You will need to SSH access to your Linux machine(s). If you are SSHing from Windows, I recommend installing the Windows Subsystem for Linux (WSL) feature and either enabling straight BASH or installing the Ubuntu image from the Windows Store.
+- You will need SSH access to your Linux machine(s). If you are SSHing from Windows, I recommend installing the Windows Subsystem for Linux (WSL) feature and either enabling straight BASH or installing the Ubuntu image from the Windows Store.
 
 Since this tutorial includes Plex services monitoring you will need the following installed somewhere:
 
