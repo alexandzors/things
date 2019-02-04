@@ -52,7 +52,7 @@ If you get a permission denied error just append `sudo` to the beginning of your
 
 - Now that influxdb is running we can create our first database. This will be for [Varken](https://github.com/Boerderij/Varken) which will be collecting data from Sonarr, Radarr, Tautulli, Ombi, and sending it to influx. So run the following command to create your varken db.
 
-`curl -i -XPOST http://influxhostip:8086/query --data-urlencode "q=CREATE DATABSE varken`
+`curl -i -XPOST http://influxhostip:8086/query --data-urlencode "q=CREATE DATABASE varken`
 
 Hopefully you got a successful response and not a 404 message.
 
