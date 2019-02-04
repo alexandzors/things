@@ -216,9 +216,9 @@ Note: If you navigate to http://ip:19091/metrics you can see what metrics can be
 
 **This guide is incomplete and is still a WIP. Please feel free to reach out with any issues!**
 
-Please make sure to check out the creators of Varken and the Transmission Exporter!:
+Please make sure to check out the repos for Varken and Transmission-exporter! A lot of the credit goes to them for making this easy for media server setups.:
 
-- https://github.com/Boerderij/Varken
-- https://github.com/metalmatze/transmission-exporter
+- [https://github.com/Boerderij/Varken](https://github.com/Boerderij/Varken)
+- [https://github.com/metalmatze/transmission-exporter](https://github.com/metalmatze/transmission-exporter)
 
 --< [Back](https://alexandzors/github/things)
