@@ -64,12 +64,13 @@ Without Varken, this project would have been a lot harder to get going. Make sur
 
 `mkdir /home/username/varken`
 
-- Now you will need to create a varken.ini file in your ~/varken directory. You can find an example of this config file [here](https://github.com/alexandzors/things/confg_files/varken.ini). To create this file you can run either:
+- Now you will need to create a varken.ini file in your ~/varken directory. You can find an example of this config file [here](https://github.com/Boerderij/Varken/blob/master/data/varken.example.ini). To create this file you can run either:
 
 `nano varken.ini` or `touch varken.ini && nano varken.ini`
 
 Varken config docs can be found [here](https://github.com/Boerderij/Varken/wiki/Configuration)
 
+*You can find me exact varken.ini file [here](https://github.com/alexandzors/things/blob/master/config_files/varken.ini) if you are stuck*
 - Once the config file is done you can now run the following to start Varken
 
 `docker run -d --name=varken -v /home/username/varken:/config TZ=America/Chicago boerderij/varken`
