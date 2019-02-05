@@ -242,6 +242,6 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 
 - [Telegraf for Grafana on Windows](https://alexandzors.github.io/things/telegraf)
 - [Glances for Grafana on Linux](https://alexandzors.github.io/things/glances)
-- [Speedtest Graph in Grafana](https://https://alexandzors.github.io/things/speedtest)
+- [Speedtest Graph in Grafana](https://alexandzors.github.io/things/speedtest)
 
 --< [Back to landing page](https://alexandzors.github.io/things/)
