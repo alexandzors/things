@@ -15,6 +15,8 @@ When I first went to setup Grafana for homelab monitoring I quickly came to the 
 
 Also this tutorial is not designed for people that wish to run Grafana outside of their network on a cloud hosted instance. So do not expect any sort of guide on SSL except for running Grafana behind a reverse proxy powered by [Caddy](https://caddyserver.com/)! If you wish to setup SSL/TLS/Encryption for your database calls and collectors, you will have to find a different guide for that. Sorry!
 
+>I plan to make this as detailed as possible in the coming weeks. Right now its a start to what I hope will be a fully featured guide. So bare with me!
+
 -----
 
 ## Pre-Requisites
