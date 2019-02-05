@@ -52,7 +52,7 @@ If you get a permission denied error just append `sudo` to the beginning of your
 
 - Now that influxdb is running we can create our first database. This will be for [Varken](https://github.com/Boerderij/Varken) which will be collecting data from Sonarr, Radarr, Tautulli, Ombi, and sending it to influx. So run the following command to create your varken db.
 
-`curl -i -XPOST http://influxhostip:8086/query --data-urlencode "q=CREATE DATABASE varken`
+`curl -i -XPOST http://influxhostip:8086/query --data-urlencode "q=CREATE DATABASE varken"`
 
 You should see something like this, if it works:
 
@@ -236,10 +236,10 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 - [https://github.com/metalmatze/transmission-exporter](https://github.com/metalmatze/transmission-exporter)
 
 
-# More Guides
+# More Guides (WIP)
 
 - [Telegraf for Grafana on Windows](https://alexandzors.github.io/things/telegraf)
 - [Glances for Grafana on Linux](https://alexandzors.github.io/things/glances)
-- [Pi-hole scraper for Grafana](https://chrisbergeron.com/2017/12/28/pihole_dashboard/)
+- [Speedtest Graph in Grafana](https://https://alexandzors.github.io/things/speedtest)
 
 --< [Back to landing page](https://alexandzors.github.io/things/)
