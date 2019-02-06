@@ -8,6 +8,8 @@ First check out [Speedtest-for-InfluxDB-and-Grafana](https://github.com/barrycar
 
 Now that you have the speedtest container running in docker and sending the info to influxdb (I recommend changing the `delay = 300` to someting more infrequent so its not testing every 5 minutes) we can set up the graph to plot the data.
 
+*Note: You can use [this site](https://www.speedtestserver.com/) to get speedtest server IDs if you wish to specify them instead of using "Auto."
+
 - Open Grafana and in your dashboard of choice and select "Add Panel"
 - Select "Graph"
 - Now on the new graph panel, select edit in the drop down menu and enter the following info under the metrics tab:
