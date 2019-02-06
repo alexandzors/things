@@ -3,6 +3,7 @@ layout: default
 ---
 
 ![](https://i.imgur.com/7GFWYIi.png)
+*This is supposed to be roughly gigabit but.... Comcast..*
 
 # Speedtest Graph in Grafana.
 
