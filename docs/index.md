@@ -14,6 +14,6 @@ Follow the links below for guides and other stuff!
 
 ## Useful links
 
-- [Discord Help Server for these guides and the scripts in my repository!](https://discord.gg/8y6sndR)
+- [Discord Help Server](https://discord.gg/8y6sndR) - For these guides and the scripts in my repository
 - [List of InfluxDB things](https://github.com/mark-rushakoff/awesome-influxdb)
 - [Tips](https://alexsguardian.net/donate)
