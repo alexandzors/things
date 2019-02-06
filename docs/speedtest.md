@@ -2,6 +2,8 @@
 layout: default
 ---
 
+![](https://i.imgur.com/7GFWYIi.png)
+
 # Speedtest Graph in Grafana.
 
 First check out [Speedtest-for-InfluxDB-and-Grafana](https://github.com/barrycarey/Speedtest-for-InfluxDB-and-Grafana) which is pretty straight forward for setting up the docker container to run the speedtests. Make sure to follow along with the guide!
