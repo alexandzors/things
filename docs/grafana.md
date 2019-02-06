@@ -27,6 +27,8 @@ Also this tutorial is not designed for people that wish to run Grafana outside o
 - You will need to know how to query databases. *Don't worry ill guide you through some basics!*
 - You will need SSH access to your Linux machine(s). If you are SSHing from Windows, I recommend installing the Windows Subsystem for Linux (WSL) feature and either enabling straight BASH or installing the Ubuntu image from the Windows Store.
 
+> If you don't have a docker system running on a Linux box you can check out my installdocker.sh and updateubuntu.sh shell scripts [here](https://github.com/alexandzors/things/tree/master/Scripts/shell_scripts)
+
 Since this tutorial includes Plex services monitoring you will need the following installed somewhere:
 
 - [Sonarr](https://sonarr.tv)
