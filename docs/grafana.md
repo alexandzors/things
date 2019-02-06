@@ -48,7 +48,7 @@ Now for this guide we will be setting up influxdb in docker. Grafana supports a 
 
 `mkdir /home/username/influxdb`
 
-`docker run -p 8086:8086 -v /home/username/influxdb:/var/lib/influxdb influxdb`
+`docker run -d -p 8086:8086 -v /home/username/influxdb:/var/lib/influxdb influxdb`
 
 If you get a permission denied error just append `sudo` to the beginning of your commands.
 
