@@ -165,7 +165,7 @@ Now that we have Grafana, Influxdb, and Varken running we can now get the dashbo
 
 ![My Dashboard](https://i.imgur.com/WfCEpNd.png)
 
-- Now my dashboard includes data from [Glances](https://nicolargo.github.io/glances/) as well as [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/). Which when I get a chance, and my infant daughter allows me, I will get another guide up for importing glances and Telegraf data into your Varken dashboard to monitor system information. My dashboard is also not complete as there are a few other things I want to add to it.
+> Now my dashboard includes data from [Glances](https://nicolargo.github.io/glances/) as well as [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/). Which when I get a chance, and my infant daughter allows me, I will get another guide up for importing glances and Telegraf data into your Varken dashboard to monitor system information. My dashboard is also not complete as there are a few other things I want to add to it.
 
 **This guide is incomplete and is still a WIP. Please feel free to reach out with any issues!**
 
