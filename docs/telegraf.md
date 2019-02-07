@@ -107,6 +107,39 @@ Now that Telegraf.conf has been configured we can now run Telegraf.
 
 You now have a gauge that shows your cpu usage. You can get even fancier if you want with a Graph and show other cpu stats as well!
 
+## Running Telegraf via Windows Task Scheduler
+
+- General Tab
+  - First open Task Scheduler
+  - Click Task Scheduler Library
+  - Click Create Task... in the right hand panel
+  - Name = Telegraf
+  - Select "Run whether user is logged on or not"
+- Triggers Tab
+  - Click New
+    - New Trigger
+      - Begin the Task: On Startup
+      - Click OK
+- Actions Tab
+  - Click New
+    - New Action
+      - Action: Start a program
+      - Program/script: "C:\location\of\telegraf.exe"
+      - Add arguments: -quiet -config "C:\location\of\telegraf.conf"
+      - Click OK
+- Conditions Tab
+  - Leave everything default
+- Settings
+  - Allow task to be run on demand: Checked
+  - Run task as soon as possible.....: Checked
+  - Stop the task if it runs longer than: UnChecked
+  - If the task is already running......: Set to "Do not start a new instance"
+- Click OK
+
+Telegraf "should" now run at startup. If you want to start it now, highlight the task in the tasks list, right click, and click Run
+
+-----
+
 --< [Back to Grafana](https://alexandzors.github.io/things/grafana)
 
 --< [Back to landing page](https://alexandzors.github.io/things/)

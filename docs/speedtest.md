@@ -39,6 +39,8 @@ Now that you have the speedtest container running in docker and sending the info
 - If you want you can setup an alert under the "alert" tab to fire an alert when a certain query goes under a certain threshold.
 - Time Range set "override relative time" to whatever you want. I have mine set to 30 days (30d).
 
+-----
+
 --< [Back to Grafana](https://alexandzors.github.io/things/grafana)
 
 --< [Back to Landing Page](https://alexandzors.github.io/things)
