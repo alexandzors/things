@@ -147,6 +147,8 @@ Make sure that you have both the grafana-world-panel and grafana-piechart-panel 
 
 - Once Grafana is running navigate to it using your browser. If you didn't edit any settings in the grafana.ini it should be http://ip:3000. The login should be admin/admin. 
 
+> If you get a permissions error while Grafana is starting. run `chmod 777` against your Grafana directory.
+
 ## Setting up the Grafana dashboard
 
 Now that we have Grafana, Influxdb, and Varken running we can now get the dashboard setup.
@@ -165,73 +167,6 @@ Now that we have Grafana, Influxdb, and Varken running we can now get the dashbo
 
 - Now my dashboard includes data from [Glances](https://nicolargo.github.io/glances/) as well as [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/). Which when I get a chance, and my infant daughter allows me, I will get another guide up for importing glances and Telegraf data into your Varken dashboard to monitor system information. My dashboard is also not complete as there are a few other things I want to add to it.
 
-## Transmission info
-
-Now this section is for people that are using transmission as their download client. For exporting transmission data into Grafana we will need to setup [Prometheus](https://prometheus.io/).
-
-- SSH into your docker host and make a new directory for Prometheus. 
-
-`mkdir /home/username/prometheus`
-
-- Now create a prometheus.yml file in the new ~/prometheus directory.
-
-`nano prometheus.yml`
-
-```yaml
-# prometheus.yml
-global:
-  scrape_interval: 5s
-  external_labels:
-    monitor: 'prom.<hostname>'
-scrape_configs:
-  - job_name: 'transmission'
-    scrape_interval: 10s
-    static_configs:
-      - targets: ['<ipoftransmissionexporter>:19091']
-```
-
-Make sure to change \<hostname\> to the hostname of the machine hosting transmission. Also \<ipoftransmissionexporter\> to the IP of the docker machine running the container in the next step.
-
-- Setup the [transmission exporter](https://github.com/metalmatze/transmission-exporter) for Prometheus:
-
-`docker run -d -p 19091:19091 -e TRANSMISSION_ADDR=http://<ipoftransmission>:<port> metalmatze/transmission-exporter`
-
-Since I don't have any authentication for transmission I do not need to specify the username and password. If you need to just add `-e TRANSMISSION_USERNAME=username -e TRANSMISSION_PASSWORD=password` to the run string before `metalmatze/transmission-exporter`
-
-- Now we can launch Prometheus:
-
-`sudo docker run -d --name prometheus -v "/home/username/prom/prometheus.yml:/etc/prometheus/prometheus.yml" -p 9090:9090 prom/prometheus --config.file='/etc/prometheus/prometheus.yml'`
-
-Once Prometheus is running we can add it as a data source in Grafana.
-
-- Login to Grafana and click the settings cog on the left side. Click on Data Sources and then click Add data source.
-
-- Select Prometheus and enter the following info:
-
-| Setting       | Value         |
-| ------------- |:-------------:|
-| Name          | Prometheus    |
-| URL           | http://ip:9090|
-| HTTP Method   | GET           |
-
-- Now that we have Prometheus setup, return to your dashboard you setup with Varken.
-
-- Click Add and then find the singlestat panel and select it.
-
-- In the edit window for the panel, select metrics and then under datasource select Prometheus.
-
-- In the query field insert:
-
-`transmission_session_stats_downloaded_bytes{type="cumulative"}`
-
-- Select options and under Stat select "Average" and then under Unit select "data (metric)/bytes"
-
-- Click General and name the panel whatever you want.
-
-- You now have a panel that tells you the total downloaded bytes from your transmission client.
-
-Note: If you navigate to http://ip:19091/metrics you can see what metrics can be queried for transmission.
-
 **This guide is incomplete and is still a WIP. Please feel free to reach out with any issues!**
 
 Please make sure to check out the repos for Varken and Transmission-exporter! A lot of the credit goes to them for making this easy for media server setups.:
@@ -245,5 +180,6 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 - [Telegraf for Grafana on Windows](https://alexandzors.github.io/things/telegraf)
 - [Glances for Grafana on Linux](https://alexandzors.github.io/things/glances)
 - [Speedtest Graph in Grafana](https://alexandzors.github.io/things/speedtest)
+- [Transmission - Prometheus Exporter](https://alexandzors.github.io/things/transmission)
 
 --< [Back to landing page](https://alexandzors.github.io/things/)

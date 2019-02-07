@@ -6,11 +6,17 @@ layout: default
 
 Follow the links below for guides and other stuff!
 
---
+If you want something added; feel free to reach out or create a pull request!
+
+-----
 
 ## Tutorials
 
 - [Grafana Tutorial](https://alexandzors.github.io/things/grafana) - I plan to make this as detailed as possible in the coming weeks. Right now its a start to what I hope will be a fully featured guide. So bare with me!
+  - [Telegraf for Grafana on Windows](https://alexandzors.github.io/things/telegraf)
+  - [Glances for Grafana on Linux](https://alexandzors.github.io/things/glances)
+  - [Speedtest Graph in Grafana](https://alexandzors.github.io/things/speedtest)
+  - [Transmission - Prometheus Exporter](https://alexandzors.github.io/things/transmission)
 
 ## Useful links
 
