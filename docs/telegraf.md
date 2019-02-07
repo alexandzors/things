@@ -44,7 +44,7 @@ Now that Telegraf has been downloaded and extracted. We can begin the process of
 
 - Uncomment out `# database = "telegraf"` just below the urls section
 
-- Uncomment out `# skip_database_creation = false` as well and change it from `false` to `true`.
+- Uncomment out `# skip_database_creation = false` as well.
 
 > If you setup influxdb with a username and password you will have to scroll a little bit further and uncomment and edit the `## HTTP Basic Auth` section.
 
