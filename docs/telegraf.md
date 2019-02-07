@@ -40,7 +40,7 @@ Now that Telegraf has been downloaded and extracted. We can begin the process of
 
 - Under the last `# urls =` create a new line with the following:
 
-`urls = ["http://iptoinfluxdb:8086"]`
+`url = "http://iptoinfluxdb:8086"`
 
 - Uncomment out `# database = "telegraf"` just below the urls section
 
