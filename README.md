@@ -1,3 +1,5 @@
 # THINGS
 
-Just using this repo to host public/redacted versions of powershell scripts, docker compose files, etc., that I use in my homelab environment as well as some scripts I created for work that helps make my job more automated. Feel free to use/edit these as you please.
+You will find useful? scripts and other files that I use or think are handy for use in a homelab environment. Also the /docs folder contains guides for services that I use. 
+
+Feel free to take any of the hosted scripts and change them to your needs!
