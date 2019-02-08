@@ -39,6 +39,7 @@ My environment consists of both Linux and Windows virtual machines running on a 
   - 4 cores
   - 6GB RAM
   - 1Gb NIC
+  
 -----
 
 ## Pre-Requisites
