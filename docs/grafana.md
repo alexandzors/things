@@ -173,7 +173,7 @@ www.domain.net, domain.net {
 
 - Once your grafana.ini is setup, we can setup Grafana.
 
-`docker run -d --user 1000 --volume "/home/user/grafana:/var/lib/grafana" --volume "/home/user/grafana/conf:/etc/grafana" -p 3000:3000 -e "GF_SECURITY_ADMIN_PASSWORD=admin" -e "GF_INSTALL_PLUGINS=natel-influx-admin-panel,ryantxu-annolist-panel,jdbranham-diagram-panel,grafana-worldmap-panel,grafana-piechart-panel" grafana/grafana`
+`docker run -d --user 1000 --volume "/home/user/grafana:/var/lib/grafana" --volume "/home/user/grafana/conf:/etc/grafana" -p 3000:3000 -e "GF_SECURITY_ADMIN_PASSWORD=admin" -e "GF_INSTALL_PLUGINS=natel-influx-admin-panel,ryantxu-annolist-panel,jdbranham-diagram-panel,grafana-worldmap-panel,grafana-piechart-panel,grafana-clock-panel" grafana/grafana`
 
 > Make sure that you have both the grafana-world-panel and grafana-piechart-panel are included in your plugins install otherwise you won't be able to use a few Varken features.
 
@@ -216,6 +216,8 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 - [Speedtest Graph in Grafana](https://alexandzors.github.io/things/speedtest)
 - [Transmission - Prometheus Exporter](https://alexandzors.github.io/things/transmission)
 - [PiHole Dashboard](https://alexandzors.github.io/things/pihole)
+- [Weather Panel](http://blog.mike-greene.com/adding-weather-to-your-grafana-home-dashboard/)
+> If you run Grafana behind a reverse proxy with SSL or straight up SSL you need to make sure URLs in iframe panels are HTTPS! Otherwise Chrome may not load them!
 
 -----
 
