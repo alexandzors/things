@@ -215,7 +215,7 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 - [Glances for Grafana on Linux](https://alexandzors.github.io/things/glances)
 - [Speedtest Graph in Grafana](https://alexandzors.github.io/things/speedtest)
 - [Transmission - Prometheus Exporter](https://alexandzors.github.io/things/transmission)
-- [PiHole Exporter](https://alexandzors.github.io/things/pihole)
+- [PiHole Dashboard](https://alexandzors.github.io/things/pihole)
 
 -----
 
