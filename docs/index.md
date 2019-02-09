@@ -30,4 +30,4 @@ If you want something added; feel free to reach out or create a pull request!
 
 ## Pics of my Grafana Dashboards
 
-https://imgur.com/a/MtkHtln
+[https://imgur.com/a/MtkHtln](https://imgur.com/a/MtkHtln)
