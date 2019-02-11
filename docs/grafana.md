@@ -7,9 +7,9 @@ layout: default
 
 --
 
-## Pics of my WIP Grafana Dashboards
+WIP Dashboards: [https://imgur.com/a/MtkHtln](https://imgur.com/a/MtkHtln)
 
-[https://imgur.com/a/MtkHtln](https://imgur.com/a/MtkHtln)
+Dashboard json files: [https://github.com/alexandzors/things/tree/master/docs/grafana-tutorials/dashboard-jsons](https://github.com/alexandzors/things/tree/master/docs/grafana-tutorials/dashboard-jsons)
 
 ## Before we get started
 
