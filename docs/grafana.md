@@ -7,6 +7,10 @@ layout: default
 
 --
 
+## Pics of my WIP Grafana Dashboards
+
+[https://imgur.com/a/MtkHtln](https://imgur.com/a/MtkHtln)
+
 ## Before we get started
 
 When I first went to setup Grafana for homelab monitoring I quickly came to the realization that most of the guides out there kind of suck. So with a nudge from a few fellows in the 'plexaholics' Facebook group, I decided to write up this guide.
