@@ -27,6 +27,6 @@ If you want something added; feel free to reach out or create a pull request!
 - [List of InfluxDB things](https://github.com/mark-rushakoff/awesome-influxdb) - Useful stuff for Influxdb
 - [Tip](https://alexsguardian.net/donate) - If you want to tip me for my effort. Not expected but appreciated. (Allows me more time to work on this as the Wife won't be as mad... lol...)
 
-## Pics of my Grafana Dashboards
+## Pics of my WIP Grafana Dashboards
 
 [https://imgur.com/a/MtkHtln](https://imgur.com/a/MtkHtln)
