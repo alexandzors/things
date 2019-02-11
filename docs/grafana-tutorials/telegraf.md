@@ -140,6 +140,23 @@ Telegraf "should" now run at startup. If you want to start it now, highlight the
 
 -----
 
+# Setting up Telegraf on Linux
+
+This section will go over setting up Telegraf to monitor your Linux hosts and if run Docker on them.
+
+(WIP)
+
+## Monitoring Linux Host Resources
+
+## Monitoring Docker Containers
+
+## Monitoring IPMI Enabled Servers
+
+## Monitoring SNMP Devices
+
+----
+
 --< [Back to Grafana](https://alexandzors.github.io/things/grafana)
 
 --< [Back to landing page](https://alexandzors.github.io/things/)
+
