@@ -31,19 +31,23 @@ My environment consists of both Linux and Windows virtual machines running on a 
   - 10GB RAM
   - 1Gb NIC
   - DDA'd Quadro P2000
+  - Windows Server 2019 DC
 - Docker System 1:
   - 4 cores
   - 4GB RAM
   - 1Gb NIC
+  - Ubuntu Server 17.10
 - Docker System 2:
   - 4 cores
   - 6GB RAM
   - 1Gb NIC
+  - Ubuntu Server 17.10
 - Media Handling VM:
   - 4 cores
   - 6GB RAM
   - 1Gb NIC
-  
+  - Windows Server 2019 DC
+
 -----
 
 ## Pre-Requisites
@@ -136,15 +140,15 @@ Or you can install [Portainer](https://www.portainer.io/).
 
 So now that we have our first data source setup and our first data collector, we are now ready to setup Grafana to aggregate and graph it!
 
-- SSH into your docker system again and create a directory for Grafana and a directory for Grafana configs.
+1. SSH into your docker system again and create a directory for Grafana and a directory for Grafana configs.
 
 `mkdir /home/username/grafana && mkdir /home/username/grafana/conf`
 
-- Now create a grafana.ini file inside the ~/conf folder.
+2. Now create a grafana.ini file inside the ~/conf folder.
 
 `nano grafana.ini`
 
-- Now you can c/p the sample.ini into the grafana.ini file which can be found [here](https://raw.githubusercontent.com/grafana/grafana/master/conf/sample.ini). Now you can edit these settings per your environment. For mine, I only changed a few settings in /[server/] to allow Grafana to work behind my caddy reverse proxy.
+- Now you can c/p the sample.ini into the grafana.ini file which can be found [here](https://raw.githubusercontent.com/grafana/grafana/master/conf/sample.ini). Now you can edit these settings per your environment. For mine, I only changed a few settings in [server] to allow Grafana to work behind my caddy reverse proxy.
 
 ```ini
 domain = mydomain.net
@@ -175,7 +179,9 @@ www.domain.net, domain.net {
 }
 ```
 
-- Once your grafana.ini is setup, we can setup Grafana.
+> Not sure why I had to do `without /grafana/` but that was the only way it would work. Even though /grafana is set in grafana.ini....
+
+3. Once your grafana.ini is setup, we can setup Grafana.
 
 `docker run -d --user 1000 --volume "/home/user/grafana:/var/lib/grafana" --volume "/home/user/grafana/conf:/etc/grafana" -p 3000:3000 -e "GF_SECURITY_ADMIN_PASSWORD=admin" -e "GF_INSTALL_PLUGINS=natel-influx-admin-panel,ryantxu-annolist-panel,jdbranham-diagram-panel,grafana-worldmap-panel,grafana-piechart-panel,grafana-clock-panel" grafana/grafana`
 
@@ -183,7 +189,7 @@ www.domain.net, domain.net {
 
 > If you need to install plugins later you can execute the following on your docker host to install more: `docker exec -i -t NAME-OF-GRAFANA-CONTAINER grafana-cli plugins install PLUGIN-NAME`
 
-- Once Grafana is running navigate to it using your browser. If you didn't edit any settings in the grafana.ini it should be http://ip-of-docker-host:3000. The login should be admin/admin. 
+4. Once Grafana is running navigate to it using your browser. If you didn't edit any settings in the grafana.ini it should be http://ip-of-docker-host:3000. The login should be admin/admin. 
 
 > If you get a permissions error while Grafana is starting: Run `chmod 777` against your Grafana directory.
 
@@ -191,7 +197,7 @@ www.domain.net, domain.net {
 
 Now that we have Grafana, Influxdb, and Varken running we can now get the dashboard setup.
 
-- First we need to add the Influxdb data source to Grafana. If this is the first time you are setting up Grafana, there should be a walk through. So click on Add new data source and then select Influxdb. Enter the following information:
+5. First we need to add the Influxdb data source to Grafana. If this is the first time you are setting up Grafana, there should be a walk through. So click on Add new data source and then select Influxdb. Enter the following information:
 
 | Setting       | Value         |
 | ------------- |:-------------:|
@@ -199,11 +205,11 @@ Now that we have Grafana, Influxdb, and Varken running we can now get the dashbo
 | URL           | http://ip:8086|
 | Database      | varken        |
 
-- Now that the data source is added we can add the dashboard. Again the awesome Varken fellows have an official Varken dashboard that includes pre-configured elements for reading data from your 'varken' database. You can get the dashboard ID from [here](https://grafana.com/dashboards/9585). Paste the code into the dashboard import section and click "load."
+6. Now that the data source is added we can add the dashboard. Again the awesome Varken fellows have an official Varken dashboard that includes pre-configured elements for reading data from your 'varken' database. You can get the dashboard ID from [here](https://grafana.com/dashboards/9585). Paste the code into the dashboard import section and click "load."
 
 ![My Dashboard](https://i.imgur.com/WfCEpNd.png)
 
-> Now my dashboard includes data from [Glances](https://nicolargo.github.io/glances/) as well as [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/). My Dashboard system is far from complete. So please keep checking the [Landing Page](https://alexandzors.github.io/things) for more tutorials.
+> Now my dashboard also includes data from [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/). My Dashboard system is far from complete. So please keep checking the [Landing Page](https://alexandzors.github.io/things) for more tutorials. [Telegraf guide](https://alexandzors.github.io/things/grafana-tutorials/telegraf).
 
 **This guide is incomplete and is still a WIP. Please feel free to reach out with any issues!**
 
