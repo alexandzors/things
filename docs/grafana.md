@@ -211,10 +211,10 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 
 # More Guides (WIP)
 
-- [Telegraf for Grafana](https://alexandzors.github.io/things/grafana/telegraf)
-- [Speedtest Graph in Grafana](https://alexandzors.github.io/things/grafana/speedtest)
-- [Transmission - Prometheus Exporter](https://alexandzors.github.io/things/grafana/transmission)
-- [PiHole Dashboard](https://alexandzors.github.io/things/grafana/pihole)
+- [Telegraf for Grafana](https://alexandzors.github.io/things/grafana-tutorials/telegraf)
+- [Speedtest Graph in Grafana](https://alexandzors.github.io/things/grafana-tutorials/speedtest)
+- [Transmission - Prometheus Exporter](https://alexandzors.github.io/things/grafana-tutorials/transmission)
+- [PiHole Dashboard](https://alexandzors.github.io/things/grafana-tutorials/pihole)
 - [Weather Panel](http://blog.mike-greene.com/adding-weather-to-your-grafana-home-dashboard/)
 > If you run Grafana behind a reverse proxy with SSL or straight up SSL you need to make sure URLs in iframe panels are HTTPS! Otherwise Chrome may not load them!
 
