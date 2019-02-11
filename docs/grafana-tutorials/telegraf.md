@@ -138,6 +138,8 @@ You now have a gauge that shows your cpu usage. You can get even fancier if you 
 
 Telegraf "should" now run at startup. If you want to start it now, highlight the task in the tasks list, right click, and click Run
 
+> You can use the service install of Telegraf but you need to make sure your config file is in the proper Program Files directory and Telegraf has read permissions for that directory.
+
 -----
 
 # Setting up Telegraf on Linux
@@ -148,11 +150,79 @@ This section will go over setting up Telegraf to monitor your Linux hosts and if
 
 ## Monitoring Linux Host Resources
 
+- First we need to get the Telegraf deb installer package.
+
+`cd /home/username && wget https://dl.influxdata.com/telegraf/releases/telegraf_1.9.4-1_amd64.deb`
+
+- And then run dpkg to install telegraf.
+
+`sudo dpkg -i telegraf_1.9.4-1_amd64.deb`
+
+> You can get the latest version of Telegraf [here](https://portal.influxdata.com/downloads/). 1.9.4 was the latest at the time this guide was created.
+
+- Now we need to setup the telegraf.conf file.
+
+`sudo nano /etc/telegraf/telegraf.conf`
+
+- Find and change the `[[outputs.influxdb]]` to your influxdb connection info and db name. (For this guide I just used the default "telegraf" db.).
+
+- Save your changes and then run `sudo systemctl start telegraf.service` to start telegraf.
+
+> If you wait a few seconds you can run `sudo systemctl status telegraf.service` to check the status of telegraf.
+
+You should now have machine stats in your Influxdb from Telegraf. Panel setup is basically the same as the Windows guide except you need to omit the "win_" portion to your queries.
+
 ## Monitoring Docker Containers
+
+You can monitor your docker system by enabling `[[inputs.docker]]` in your telegraf.conf file. 
+
+> Note if it is a remote server you wish to monitor you will need to [enable the remote API for dockerd](https://success.docker.com/article/how-do-i-enable-the-remote-api-for-dockerd).
+
+Edit your settings to how you want them and save the config file. Then run: 
+
+`sudo usermod -aG docker telegraf` to allow Telegraf to interact with your docker.sock
+
+Then start or restart telegraf.service:
+
+`sudo systemctl start telegraf.service` or `sudo systemctl restart telegraf.service`
 
 ## Monitoring IPMI Enabled Servers
 
+For this you will need two things:
+
+1. A server that can be accessed over [IPMI](https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface).
+2. IPMITOOL needs to be installed.
+
+### Installing IPMI
+
+`sudo apt-get install ipmitool -y`
+
+To check your server connection you can run:
+
+`ipmitool -H 10.0.0.193 -U USR -P PW sensor`
+
+Then enable [[inputs.ipmi_sensor]] in your Telegraf.conf file:
+
+```conf
+[[inputs.ipmi_sensor]]
+path = "/user/bin/ipmitool"
+servers = ["USERNAME:PASSWORD@lan(IP-OF-SERVER)"]
+interval = "30s"
+timeout = "20s"
+metric_version = "SUPPORTED METRIC VERSION OF SERVER"
+```
+
+Save and close your file. Then run either:
+
+`sudo systemctl start telegraf.service` or `sudo systemctl restart telegraf.service`
+
 ## Monitoring SNMP Devices
+
+(WIP)
+
+## Monitoring Ubiquiti Devices via MIB
+
+(WIP)
 
 ----
 
