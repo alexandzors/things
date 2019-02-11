@@ -12,7 +12,7 @@ For this tutorial I am going to be assuming your Pi-hole instance is running on 
 
 -----
 
-## Getting Started
+## Local Script Version
 
 We will be using the script from this [repo](https://github.com/janw/pi-hole-influx) to scrape the Pi-hole admin API located at `http://piholeip/admin/api.php`
 
@@ -28,7 +28,7 @@ We will be using the script from this [repo](https://github.com/janw/pi-hole-inf
 
 - After python-pip is installed we need to clone the repo.
 
-`git clone https://github.com/janw/pi-hole-influx.git /home/username/pihole-influx
+`git clone https://github.com/janw/pi-hole-influx.git /home/username/pihole-influx`
 
 - Now navigate to `/pihole-influx` and run: `pip install -r requirements.txt`
 
@@ -96,9 +96,11 @@ If you have followed any of the other Tutorials from this guide you should alrea
 
 Now you can import a basic dashboard using the ID from the script's repo. This will give you some basic info from your Pi-hole data source. The Dashboard ID: 6603 
 
-HOWEVER, there are a few issues with it. First you will want to edit the Realtime Queries and add: `non_negative_derivative` to each of the queries, under "Metrics", so the Y-Axis has no negative values. And also if you don't really have lines, make sure to select "Stacked" under the Display tab.
+HOWEVER, there are a few issues with it. First you will want to edit the Realtime Queries and add: `non_negative_derivative` or add `math(* -1)` to each of the queries, under "Metrics", so the Y-Axis has no negative values. And also if you don't really have lines, make sure to select "Stacked" under the Display tab.
 
 This one is setup by personal preference so have at it!
+
+## Prometheus Exporter Version
 
 -----
 
