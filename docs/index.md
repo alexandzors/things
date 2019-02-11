@@ -15,7 +15,7 @@ If you want something added; feel free to reach out or create a pull request!
 - [Grafana Media Server using Varken](https://alexandzors.github.io/things/grafana) - I plan to make this as detailed as possible in the coming weeks. Right now its a start to what I hope will be a fully featured guide. So bare with me!
   - [Telegraf for Grafana](https://alexandzors.github.io/things/grafana-tutorials/telegraf)
   - [Speedtest Graph in Grafana](https://alexandzors.github.io/things/grafana-tutorials/speedtest)
-  - [Transmission - Prometheus Exporter](https://alexandzors.github.io/things/grafana/transmission)
+  - [Transmission - Prometheus Exporter](https://alexandzors.github.io/things/grafana-tutorials/transmission)
   - [PiHole Dashboard](https://alexandzors.github.io/things/grafana-tutorials/pihole)
   - [Weather Panel](http://blog.mike-greene.com/adding-weather-to-your-grafana-home-dashboard/)
 > If you run Grafana behind a reverse proxy with SSL or straight up SSL you need to make sure URLs in iframe panels are HTTPS! Otherwise Chrome may not load them!
