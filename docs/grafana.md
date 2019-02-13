@@ -219,6 +219,10 @@ Please make sure to check out the repos for Varken and Transmission-exporter! A 
 - [https://github.com/metalmatze/transmission-exporter](https://github.com/metalmatze/transmission-exporter)
 
 
+### Quick Notes
+
+- If you are running Influxdb and Grafana on the same docker host you can use the internal docker IP for the database connections. Same for any other same host connections.
+
 # More Guides (WIP)
 
 - [Telegraf for Grafana](https://alexandzors.github.io/things/grafana-tutorials/telegraf)
