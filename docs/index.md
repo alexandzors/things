@@ -12,7 +12,7 @@ If you want something added; feel free to reach out or create a pull request!
 
 ## Tutorials
 
-- THE GRAFANA TUTORIAL HAS MOVED [HERE](https://alexsguardian.net/2019/02/19/grafana-homelab-monitoring/)!
+- THE GRAFANA TUTORIAL HAS MOVED [HERE](https://alexsguardian.net/grafana-guide/)!
 
 ## Useful links
 
