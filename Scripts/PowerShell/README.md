@@ -8,13 +8,6 @@ This script cleans junk files out of the plex data directory to reduce bloat. Cu
 This script writes to the same Event Log as `Plex-Watchdog.ps1`.
 
 ---
-# Mount-Media-Directory.ps1
-This script mounts a media directory at login. This is useful for when Windows does not automatically reconnect to the shared drive after boot.
-
-# Mount-Plex-Media-Directory.ps1
-Same as above but set for a directory named Plex.
-
----
 # Plex-Watchdog.ps1
 Invoked by `Plex-Watchdog-Invoker.vbs`. This script checks to see if Plex is running by querying the plex web UI for the local server. If it returns a HTTP 500 error (aka a timeout) the script will automatically terminate the `Plex Media Server` service as well as any associated child services. It will then attempt to restart the `Plex Media Server` service executable. 
 
