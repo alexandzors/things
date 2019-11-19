@@ -17,7 +17,10 @@ This script writes to the Windows Event log under Event Viewer > Applications > 
 
 Please run `New-EventLog -source Plex -LogName PlexWatchDog` in an elevated PowerShell session before running this script!
 
-***Note:*** `Plex-Watchdog-Invoker.vbs`, and `Plex-Watchdog.ps1` must be in the same directory!
+> ***Note:*** 
+`Plex-Watchdog-Invoker.vbs`, and `Plex-Watchdog.ps1` must be in the same directory!
+
+**Update:** The script now supports sending status notifications to Discord via a channel webbook. [See Discord dev portal](https://discordapp.com/developers/docs/resources/webhook).
 
 ## Plex-WatchDog-Invoker.vbs
 Used to invoke the Plex-Watchdog.ps1 script. Allows the script to run without a UI popup.
