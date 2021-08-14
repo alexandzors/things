@@ -1,0 +1,21 @@
+# For use with <alexandzors/caddy>
+# Updated by github.com/alexandzors 09-13-2021
+version: '3.6'
+services:
+  caddy:
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500k"
+        max-file: "1"
+    network_mode: "bridge"
+    image: alexandzors/caddy
+    ports:
+        - 80:80
+        - 443:443
+    volumes:
+        - /opt/docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+        - /opt/docker/caddy:/data
+        - /opt/docker/caddy:/config
+        - /opt/docker/caddy/auth/local/users.json:/etc/caddy/auth/local/users.json

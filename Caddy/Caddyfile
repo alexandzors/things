@@ -1,0 +1,268 @@
+#Example Caddyfile for alexandzors/caddy docker image.
+# This file uses Caddy V2 syntax and WILL NOT work with Caddy V1. You should upgrade anyway.
+# See caddy_docker-compose.yml for caddy deployment
+# Last updated by github.com/alexandzors @ 09/13/2021
+# Its recommended to use caddy fmt and caddy validate before using your Caddyfile.
+
+{
+        email {$certsemail}
+# UNCOMMENT BELOW LINE TO USE LET'S ENCRYPT STAGING TO TEST DOMAIN AND PORT SETUP BEFORE GOING INTO PRODUCTION
+#       acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+        admin localhost:2019
+        #order filter after encode
+        debug
+}
+(header) {
+        header {
+                Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+                X-Xss-Protection "1; mode=block"
+                X-Content-Type-Options "nosniff"
+                X-Frame-Options "DENY"
+                Content-Security-Policy "upgrade-insecure-requests"
+                Referrer-Policy "strict-origin-when-cross-origin"
+                Cache-Control "public, max-age=15, must-revalidate"
+                Feature-Policy "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'self'; camera 'none'; encrypted-media 'none'; fullscreen 'self'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture *; speaker 'none'; sync-xhr 'none'; usb 'none'; vr 'none'"
+        }
+}
+# Cloudflare DNS tls setup DNS verification via Let's Encrypt
+(tls) {
+        tls {
+                dns cloudflare {$CFAPITOKEN}
+        }
+}
+
+{$BASEDOMAINTLD} {
+        import header
+        import tls
+        log {
+                output file /config/logs/lab.log {
+                        roll_size 50mb
+                        roll_keep 2
+                        roll_keep_for 24h
+                }
+        }
+
+# Uncomment this section if you want the basedomain to display a custom index.html page
+#        root /* /config
+#        file_server {
+#                index index.html
+#        }
+
+# Uncomment this section if you want to use the auth plugin that this image comes with. 
+# Docs: https://github.com/greenpau/caddy-auth-portal
+#        route /auth* {
+#                auth_portal {
+#                        ui {
+#                                theme basic
+#                        }
+#                        backends {
+#                                local_backend {
+#                                        method local
+#                                        path /config/users.json
+#                                        realm local
+#                                }
+#                        }
+#                }
+#        }
+
+        route /sonarr* {
+                reverse_proxy {$SONARRADDR}:8989
+        }
+        route /radarr* {
+                reverse_proxy {$RADARRADDR}:7878
+        }
+        route /tautulli* {
+                reverse_proxy {$TAUTULLIADDR}:8181
+        }
+        #        route /lidarr* {}
+        route /bazarr* {
+                reverse_proxy {$BAZARRADDR}:6767
+        }
+
+# Uncomment this section to reverse proxy the base domain tld to something.        
+#        route * {
+#            reverse_proxy <IP>
+#        }
+}
+
+#Deluge WebUI: https://www.deluge-torrent.org/
+dl.{$BASEDOMAINTLD} {
+        import header
+        import tls
+        log {
+                output file /config/logs/dl.log {
+                        roll_size 10mb
+                        roll_keep 2
+                        roll_keep_for 24h
+                }
+                level debug
+        }
+        @notdeluge {
+                not path /deluge
+        }
+        basicauth /deluge scrypt {
+                username {$scryptpasswordusr1}
+        }
+        route /deluge* {
+                uri strip_prefix deluge
+                reverse_proxy {$DELUGEADDR}:8112 {
+                        # You need this header info if deluge is running over a VPN and allows a local connection via a single network ip range.
+                        header_up X-Real-IP {$CADDYADDR}
+                        header_up X-Deluge-Base "/deluge"
+                }
+        }
+        route @notdeluge {
+                redir https://alexslab.dev
+        }
+}
+
+#Apache Guacamole RDP: https://guacamole.apache.org/
+rdp.{$BASEDOMAINTLD} {
+        import tls
+        import header
+        log {
+            output file /config/logs/rdp.log {
+                roll_size 50mb
+                roll_keep 5
+                roll_keep_for 80h
+            }
+        }
+        @notGuac {
+                not path /guacamole/*
+        }
+        redir @notGuac /guacamole/
+        reverse_proxy {$GUACADDR}:5001 {
+                flush_interval -1
+        }
+        @websockets {
+                header Connection *Upgrade*
+                header Upgrade websocket
+        }
+        reverse_proxy @websockets {$GUACADDR}:5001 {
+                flush_interval -1
+        }
+}
+
+#Caddy Served FTP
+ftp.{$BASEDOMAINTLD} {
+        import header
+        import tls
+        encode gzip
+        log {
+            output file /config/logs/ftp.log {
+                roll_size 50mb
+                roll_keep 5
+                roll_keep_for 80h
+            }
+        }
+        basicauth {
+            username {$bcryptpasswordusr1}
+            username2 {$bcryptpasswordusr2}
+        }
+        file_server {
+            root /mnt/ftp
+            hide folder1, folder2, file1, file2
+            browse
+        }
+}
+
+#Ombi: https://github.com/Ombi-app/Ombi
+ombi.{$BASEDOMAINTLD} {
+        import header
+        import tls
+        log {
+            output file /config/logs/ombi.log {
+                roll_size 50mb
+                roll_keep 5
+                roll_keep_for 80h
+            }
+        }
+        reverse_proxy {$OMBIADDR}:3579 {
+                header_up APP_BASE_HREF ombi.{$BASEDOMAINTLD}
+        }
+}
+
+#Plex: https://plex.tv
+plex.{$BASEDOMAINTLD} {
+        encode gzip
+        import tls
+        import header
+        log {
+                output file /config/logs/plex.log {
+                        roll_size 50mb
+                        roll_keep 5
+                        roll_keep_for 80h
+                }
+        }
+        reverse_proxy * {$PLEXADDR}:32400
+        @websockets {
+                header Connection *Upgrade*
+                header Upgrade websocket
+        }
+        reverse_proxy @websockets {$PLEXADDR}:32400
+}
+
+#Ubiquiti Unifi: https://ui.com
+unifi.{$BASEDOMAINTLD} {
+        import tls
+        import header
+        log {
+                output file /config/logs/unifi.log {
+                        roll_size 50mb
+                        roll_keep 5
+                        roll_keep_for 80h
+                }
+        }
+        reverse_proxy {
+                to https://{$UNIFIADDR}:8443
+                transport http {
+                        tls
+                        tls_insecure_skip_verify
+                }
+        }
+}
+
+#Ubiquiti ISP: https://www.ui.com/uisp/
+
+#unms.{$BASEDOMAINTLD}{
+#        redir https://uisp.{$BASEDOMAINTLD}
+#}
+uisp.{$BASEDOMAINTLD} {
+        import tls
+        import header
+        log {
+            output file /config/logs/unms.log {
+                roll_size 50mb
+                roll_keep 5
+                roll_keep_for 80h
+            }
+        }
+        reverse_proxy {
+            to https://{$UISPADDR}
+            transport http {
+                tls
+                tls_insecure_skip_verify
+            }
+        }
+}
+
+#Windows Admin Center: https://www.microsoft.com/en-us/windows-server/windows-admin-center
+wac.{$BASEDOMAINTLD} {
+       import header
+        encode zstd gzip
+        import tls
+        log {
+            output file /config/logs/wac.log {
+                roll_size 50mb
+                roll_keep 5
+                roll_keep_for 80h
+            }
+        }
+        reverse_proxy {
+                transport http_ntlm {
+                        tls
+                        tls_insecure_skip_verify
+                }
+                to {$WACADDR}:443
+        }
+}

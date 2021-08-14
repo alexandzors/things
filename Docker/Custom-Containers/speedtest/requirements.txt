@@ -1,4 +1,0 @@
-influxdb
-speedtest-cli
-requests
-configparser
